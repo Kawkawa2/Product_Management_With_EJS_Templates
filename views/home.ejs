@@ -4,54 +4,58 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="output.css" rel="stylesheet" />
+    <link rel="stylesheet" href="swiper/swiper-bundle.css" />
   </head>
   <body>
     <section class="max-w-7xl m-auto p-10">
       <div class="flex items-center justify-center py-4 md:py-8 flex-wrap">
-        <button
-          type="button"
+        <a
+          href="/"
           class="text-blue-700 hover:text-white border border-blue-600 bg-white hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-full text-base font-medium px-5 py-2.5 text-center mr-3 mb-3 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:bg-gray-900 dark:focus:ring-blue-800"
         >
           All categories
-        </button>
-        <button
+        </a>
+
+        <% distinctCategories.forEach(item => {%>
+        <a
           type="button"
-          class="text-gray-900 border border-white hover:border-gray-200 dark:border-gray-900 dark:bg-gray-900 dark:hover:border-gray-700 bg-white focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-full text-base font-medium px-5 py-2.5 text-center mr-3 mb-3 dark:text-white dark:focus:ring-gray-800"
+          href="/<%=item %>"
+          class="text-gray-900 border border-white hover:border-gray-20 bg-white focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-full text-base font-medium px-5 py-2.5 text-center mr-3 mb-3"
         >
-          Shoes
-        </button>
-        <button
-          type="button"
-          class="text-gray-900 border border-white hover:border-gray-200 dark:border-gray-900 dark:bg-gray-900 dark:hover:border-gray-700 bg-white focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-full text-base font-medium px-5 py-2.5 text-center mr-3 mb-3 dark:text-white dark:focus:ring-gray-800"
-        >
-          Bags
-        </button>
-        <button
-          type="button"
-          class="text-gray-900 border border-white hover:border-gray-200 dark:border-gray-900 dark:bg-gray-900 dark:hover:border-gray-700 bg-white focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-full text-base font-medium px-5 py-2.5 text-center mr-3 mb-3 dark:text-white dark:focus:ring-gray-800"
-        >
-          Electronics
-        </button>
-        <button
-          type="button"
-          class="text-gray-900 border border-white hover:border-gray-200 dark:border-gray-900 dark:bg-gray-900 dark:hover:border-gray-700 bg-white focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-full text-base font-medium px-5 py-2.5 text-center mr-3 mb-3 dark:text-white dark:focus:ring-gray-800"
-        >
-          Gaming
-        </button>
+          <%= item %>
+        </a>
+        <%});%>
       </div>
 
       <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
         <% product.forEach(element => { %>
         <div class="" id="<%= element.id %>">
-          <a href="#">
-            <img
-              class="h-auto max-w-full rounded-lg"
-              src="https://flowbite.s3.amazonaws.com/docs/gallery/square/image.jpg"
-              alt=""
-            />
-          </a>
+          <!-- Slider main container -->
+          <div class="swiper w-80 h-60">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper" id="swiper-<%= element.id %>">
+              <!-- Slides -->
+              <% element.images.forEach(image => {%>
+              <a href="#" class="swiper-slide">
+                <img
+                  class="rounded-lg max-w-full max-h-full object-cover"
+                  src="<%= image %>"
+                />
+              </a>
+              <%});%>
+            </div>
 
-          <div class="mt-4 flex justify-between">
+            <!-- If we need pagination -->
+            <div class="swiper-pagination"></div>
+
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+
+            <!-- If we need scrollbar -->
+            <div class="swiper-scrollbar"></div>
+          </div>
+          <div class="mt-4 flex justify-between w-80 h-auto m-auto">
             <div>
               <h3 class="text-sm text-gray-700">
                 <a href="#">
@@ -69,6 +73,9 @@
         <%});%>
       </div>
     </section>
+
     <script src="flowbite/dist/flowbite.min.js"></script>
+    <script src="swiper/swiper-bundle.js"></script>
+    <script src="main.js"></script>
   </body>
 </html>
