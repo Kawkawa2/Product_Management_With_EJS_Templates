@@ -39,6 +39,7 @@
               <a href="#" class="swiper-slide">
                 <img
                   class="rounded-lg max-w-full max-h-full object-cover"
+                  loading="lazy"
                   src="<%= image %>"
                 />
               </a>
@@ -58,10 +59,7 @@
           <div class="mt-4 flex justify-between w-80 h-auto m-auto">
             <div>
               <h3 class="text-sm text-gray-700">
-                <a href="#">
-                  <span aria-hidden="true" class="absolute inset-0"></span>
-                  <%= element.title %>
-                </a>
+                <a href="#"> <%= element.title %> </a>
               </h3>
               <p class="mt-1 text-sm text-gray-500"><%= element.brand %></p>
             </div>

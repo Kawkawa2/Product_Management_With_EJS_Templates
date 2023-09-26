@@ -1,6 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const products = require("./products.json");
+const products = require("./public/products.json");
 
 dotenv.config({ path: "./config/.env" });
 
@@ -8,9 +8,11 @@ var app = express();
 
 app.set("views", "views");
 app.set("view engine", "ejs");
-app.use(express.static("public"));
-app.use(express.static("dist"));
-app.use(express.static("node_modules"));
+
+// static middleware
+app.use(express.static("public", { maxAge: 604800000 }));
+app.use(express.static("dist", { maxAge: 604800000 }));
+app.use(express.static("node_modules", { maxAge: 604800000 }));
 
 const distinctCategories = [
   ...new Set(products.products.map((product) => product.category)),
@@ -19,7 +21,7 @@ app.get("/", (req, res) => {
   let product = products.products;
   res.render("home", { product, distinctCategories });
 });
-console.log(distinctCategories);
+
 distinctCategories.forEach((element) => {
   app.get(`/${element}`, (req, res) => {
     let product = products.products.filter(
